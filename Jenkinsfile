@@ -20,7 +20,7 @@ pipeline {
                 echo 'Iniciando ataque de estresse...'
              sh '''
                 if [ ! -f vegeta ]; then
-                    curl -L "https://github.com" -o vegeta.tar.gz
+                    https://github.com/tsenart/vegeta/releases/download/v12.8.4/vegeta_12.8.4_linux_amd64.tar.gz
                     tar -xvf vegeta.tar.gz
                     chmod +x vegeta
                     fi
