@@ -1,10 +1,9 @@
 pipeline {
-    agent any // Executa em qualquer worker disponível
+    agent any
 
     stages {
         stage('Checkout') {
             steps {
-                // Baixa o código do repositório configurado no job
                 checkout scm
             }
         }
@@ -12,24 +11,29 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Compilando o projeto...'
-                // Exemplo para Node.js ou Java:
-                // sh 'npm install && npm run build'
-                // sh './gradlew build'
+                // sh 'mvn clean install' // Descomente se for usar Maven
             }
         }
 
-        stage('Test') {
+        stage('Stress Test') {
             steps {
-                echo 'Executando testes unitários...'
-                // sh 'npm test' ou sh 'mvn test'
+                echo 'Iniciando ataque de estresse...'
+                sh '''
+                    # Baixa o Vegeta se não existir
+                    if [ ! -f vegeta ]; then
+                        wget https://github.com
+                        tar -zxvf vegeta_12.8.4_linux_amd64.tar.gz
+                    fi
+
+                    # Executa o ataque (ajustado para 200 req/s para não travar seu PC de cara)
+                    echo "GET http://localhost:8080/" | ./vegeta attack -rate=200 -duration=30s | ./vegeta report
+                '''
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Fazendo deploy para o ambiente de Staging...'
-                // Exemplo: comando para copiar arquivos ou atualizar container
-                // sh './deploy.sh'
+                echo 'Fazendo deploy...'
             }
         }
     }
@@ -39,7 +43,7 @@ pipeline {
             echo 'Pipeline finalizado com sucesso!'
         }
         failure {
-            echo 'Ocorreu um erro no pipeline. Verifique os logs.'
+            echo 'Ocorreu um erro. Verifique os logs no Console Output.'
         }
     }
 }
