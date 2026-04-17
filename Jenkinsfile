@@ -18,16 +18,13 @@ pipeline {
         stage('Stress Test') {
             steps {
                 echo 'Iniciando ataque de estresse...'
-             sh '''
+             sh 
                 if [ ! -f vegeta ]; then
-                        # ESTA URL ABAIXO É O SEGREDO. COPIE ELA EXATAMENTE ASSIM:
-                        curl -L https://github.com -o vegeta.tar.gz
-                        tar -xvf vegeta.tar.gz
-                        chmod +x vegeta
+                    curl -L https://github.com -o vegeta.tar.gz
+                    tar -xvf vegeta.tar.gz
+                    chmod +x vegeta
                     fi
                     ./vegeta attack -duration=5s -rate=10 -targets=targets.txt | ./vegeta report
-             '''
-
             }
         }
 
