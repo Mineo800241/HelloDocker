@@ -19,12 +19,13 @@ pipeline {
             steps {
                 echo 'Iniciando ataque de estresse...'
                 sh '''
+                    apt-get update && apt-get install -y wget
                     # Baixa o Vegeta se não existir
                     if [ ! -f vegeta ]; then
                         wget https://github.com
                         tar -zxvf vegeta_12.8.4_linux_amd64.tar.gz
                     fi
-
+                    ./vegeta attack -duration=5s -rate=10 -targets=targets.txt |
                     # Executa o ataque (ajustado para 200 req/s para não travar seu PC de cara)
                     echo "GET http://localhost:8080/" | ./vegeta attack -rate=200 -duration=30s | ./vegeta report
                 '''
