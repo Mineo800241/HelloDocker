@@ -21,7 +21,7 @@ pipeline {
              sh '''
                  if [ ! -f vegeta ]; then
                      # URL completa para o binário do Vegeta
-                     curl -L https://github.com -o vegeta.tar.gz
+                     curl -L https://github.com/Mineo800241/HelloDocker -o vegeta.tar.gz
                      tar -xvf vegeta.tar.gz
                      chmod +x vegeta
                  fi
