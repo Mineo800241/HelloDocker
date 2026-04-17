@@ -20,7 +20,7 @@ pipeline {
                 echo 'Iniciando ataque de estresse...'
              sh '''
                 if [ ! -f vegeta ]; then
-                    curl -L linux_amd64.tar.gz -o vegeta.tar.gz
+                    curl -L https://github.com -o vegeta.tar.gz
                     tar -xvf vegeta.tar.gz
                     chmod +x vegeta
                     fi
