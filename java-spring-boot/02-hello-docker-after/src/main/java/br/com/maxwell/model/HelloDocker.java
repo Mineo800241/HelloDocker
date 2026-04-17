@@ -1,4 +1,4 @@
-package br.com.erudio.model;
+package br.com.maxwell.model;
 
 public class HelloDocker {
 	

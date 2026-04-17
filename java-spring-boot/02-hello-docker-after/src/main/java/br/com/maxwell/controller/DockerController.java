@@ -1,7 +1,7 @@
-package br.com.erudio.controller;
+package br.com.maxwell.controller;
 
-import br.com.erudio.environment.InstanceInformationService;
-import br.com.erudio.model.HelloDocker;
+import br.com.maxwell.environment.InstanceInformationService;
+import br.com.maxwell.model.HelloDocker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

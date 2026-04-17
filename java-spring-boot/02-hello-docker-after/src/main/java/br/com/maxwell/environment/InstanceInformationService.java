@@ -1,4 +1,4 @@
-package br.com.erudio.environment;
+package br.com.maxwell.environment;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

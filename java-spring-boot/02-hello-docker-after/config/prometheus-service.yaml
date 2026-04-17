@@ -1,0 +1,16 @@
+# ... (aqui ficaria o seu Deployment que já criamos)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-externo
+  namespace: monitoring
+spec:
+  type: NodePort
+  selector:
+    app: prometheus-stack
+  ports:
+    - protocol: TCP
+      port: 9090        # Porta interna do serviço
+      targetPort: 9090  # Porta do container
+      nodePort: 32000   # Porta que você vai usar no navegador/Grafana
