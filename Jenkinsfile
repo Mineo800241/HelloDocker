@@ -18,17 +18,17 @@ pipeline {
         stage('Stress Test') {
             steps {
                 echo 'Iniciando ataque de estresse...'
-                sh '''
-                if [ ! -f vegeta ]; then
-                        # O curl baixa o arquivo; o -L segue redirecionamentos e o -o define o nome do arquivo
-                        curl -L https://github.com -o vegeta.tar.gz
-                        tar -xvf vegeta.tar.gz
-                        chmod +x vegeta
-                    fi
-                    ./vegeta attack -duration=5s -rate=10 -targets=targets.txt |
-                    # Executa o ataque (ajustado para 200 req/s para não travar seu PC de cara)
-                    echo "GET http://localhost:8080/" | ./vegeta attack -rate=200 -duration=30s | ./vegeta report
-                '''
+             sh '''
+                 if [ ! -f vegeta ]; then
+                     # URL completa para o binário do Vegeta
+                     curl -L https://github.com -o vegeta.tar.gz
+                     tar -xvf vegeta.tar.gz
+                     chmod +x vegeta
+                 fi
+                 # Executa o teste (certifique-se que o targets.txt existe no seu GitHub)
+                 ./vegeta attack -duration=5s -rate=10 -targets=targets.txt | ./vegeta report
+             '''
+
             }
         }
 
